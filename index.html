@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favad | Senior Software Architect & B2B SaaS Founder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#10b981',
+                            accentHover: '#059669',
+                            textMuted: '#94a3b8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-slate-900">
+
+    <header class="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="text-emerald-500">&lt;</span>favad.me<span class="text-emerald-500">/&gt;</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-emerald-400 transition">About</a>
+                <a href="#track-record" class="hover:text-emerald-400 transition">Track Record</a>
+                <a href="#kvkk-shield" class="hover:text-emerald-400 transition">Active R&D</a>
+                <a href="#contact" class="px-4 py-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition">Get in Touch</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="max-w-5xl mx-auto px-6 py-20 md:py-32 flex flex-col justify-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold mb-6 w-fit">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Open for R&D Collaboration
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            Designing secure architectures for <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">global scale.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-3xl mb-10 leading-relaxed">
+            I am a senior software architect and B2B SaaS founder with over a decade of technical leadership. I specialize in cloud-agnostic microservices, high-throughput distributed systems, and local-first browser architectures. I have successfully scaled digital assets in the US market to over $1M USD in annual revenue, and am currently building client-side AI compliance systems at Terminal Istanbul.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#kvkk-shield" class="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold transition text-center shadow-lg shadow-emerald-500/20">
+                View Active R&D Project
+            </a>
+            <a href="#track-record" class="px-6 py-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-300 font-semibold transition text-center bg-slate-800/20">
+                Explore Portfolio
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="border-t border-slate-800 bg-[#0d1321] py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-12">Core Technical Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-xl bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">
+                        01
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">High-Availability Backend</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Architecting decoupled, highly concurrent microservices using Python, Go, and NodeJS. Expert in designing distributed event-driven systems with RabbitMQ and Kafka.
+                    </p>
+                </div>
+                <div class="p-6 rounded-xl bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">
+                        02
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Local-First Privacy Tech</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Pioneering client-side parsing and obfuscation utilities. Utilizing advanced DOM scraping, regular expressions, and client-side web models to process datasets locally before cloud sync.
+                    </p>
+                </div>
+                <div class="p-6 rounded-xl bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">
+                        03
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">B2B SaaS Scaling</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Full-stack systems development from initial concept to commercial deployment. Experienced in global billing (Stripe), OAuth flows, and multi-tenant database isolation models.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="track-record" class="py-20 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-12">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Proven Track Record</h2>
+                    <p class="text-slate-400 text-sm">International B2B software assets commercialized in competitive global markets.</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-3xl font-black text-emerald-500 tracking-tight">
+                    $1M+ ARR
+                </div>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-slate-800/20 border border-slate-800/60 flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-1">
+                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">Active US Enterprise Venture</div>
+                    <h3 class="text-xl font-extrabold text-white mb-3">Enterprise Workflow Automation Suite</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Designed, coded, and deployed a cloud-native B2B workflow automation platform targeting mid-market enterprises in the United States. Utilizing advanced queue management and headless browser clustering, the system processes millions of automated operations monthly with 99.99% uptime. 100% of the intellectual property is owned privately and runs autonomously on zero-maintenance, serverless architecture.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">AWS</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">Python</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">PostgreSQL</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">React</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kvkk-shield" class="py-20 border-t border-slate-800 bg-[#0d1321]">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="mb-12">
+                <span class="text-emerald-500 text-xs font-bold uppercase tracking-widest">Active R&D Project</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">KVKK Shield: Client-Side Data Guardrail</h2>
+                <p class="text-slate-400 mt-2">Solving the absolute biggest compliance friction point for Turkish enterprises using public Generative AI.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">The Context & Workplace Pain</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6">
+                        Under the Turkish Personal Data Protection Law (KVKK), copying and pasting customer data or personal identifiers (T.C. IDs, local phone numbers, emails) into public AI models (like ChatGPT or Claude) is classified as an illegal cross-border data transfer. 
+                        Following the **March 12, 2026 KVKK directives**, companies face severe audit liabilities and fines for "BYOAgentic" workflows used by employees without technical safeguards. Total bans are impractical and hurt workplace productivity.
+                    </p>
+                    <h3 class="text-lg font-bold text-white mb-4">The Innovation</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        **KVKK Shield** is a browser extension running 100% client-side. It intercepts chat penders instantly via DOM Event Listeners. Before any text payload is compiled and sent to US-based servers, our local regex algorithms sanitize Turkish PII patterns (TCKN, local phone numbers, emails) and replace them with secure, generalized placeholders. Real data never leaves the local machine.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl"></div>
+                    <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Active Extension Prototype (content.js)
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">
+                        This is the actual, lightweight content script running client-side inside ChatGPT/Claude to sanitize Turkish personal data in real-time.
+                    </p>
+                    <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 overflow-x-auto max-h-[300px]">
+<pre>
+<span class="text-slate-500">// Turkish T.C. ID Number RegEx Pattern</span>
+<span class="text-emerald-400">const</span> tcknRegex = <span class="text-teal-400">/\b[1-9]\d{10}\b/g</span>;
+
+<span class="text-slate-500">// Real-time sanitization function</span>
+<span class="text-emerald-400">function</span> <span class="text-blue-400">maskSensitiveData</span>(text) {
+  <span class="text-emerald-400">return</span> text.replace(tcknRegex, <span class="text-teal-400">"&lt;REDACTED_TCKN&gt;"</span>);
+}
+
+<span class="text-slate-500">// Intercept Prompt DOM submission</span>
+document.addEventListener(<span class="text-teal-400">'keydown'</span>, (event) => {
+  <span class="text-emerald-400">const</span> target = event.target;
+  <span class="text-emerald-400">if</span> (target && target.tagName === <span class="text-teal-400">'TEXTAREA'</span>) {
+    <span class="text-emerald-400">if</span> (event.key === <span class="text-teal-400">'Enter'</span>) {
+      target.value = <span class="text-blue-400">maskSensitiveData</span>(target.value);
+    }
+  }
+}, <span class="text-emerald-400">true</span>);
+</pre>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center text-xs text-slate-400">
+                        <span>Infinite margins ($0 server/API costs)</span>
+                        <span class="text-emerald-400 font-semibold">100% Client-Side</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-extrabold text-white mb-4">Let's Build the Future of AI Privacy</h2>
+            <p class="text-slate-400 mb-8 leading-relaxed">
+                I am actively applying for the **Bilişim Vadisi / Terminal İstanbul GO Path Pre-Incubation Program** to build, test, and scale the **KVKK Shield** browser extension inside the Atatürk Airport technology zone. I look forward to contributing my 10+ years of software architecture experience back to the local ecosystem.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:info@favad.me" class="px-8 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold transition">
+                    info@favad.me
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="px-8 py-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-300 font-semibold transition bg-slate-800/20">
+                    LinkedIn Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-800 py-8 bg-[#0a0f1d] text-center text-xs text-slate-500">
+        <p>&copy; 2026 favad.me. All rights reserved. Built with 100% data privacy in mind.</p>
+    </footer>
+
+</body>
+</html>
