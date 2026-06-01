@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer & Security Portfolio</title>
+    <title>Favad Qaisar | Enterprise Solutions Architect & Consultant</title>
     <style>
-        /* Modern CSS Reset & Variables */
         :root {
             --bg-color: #0f172a;
             --text-color: #f8fafc;
@@ -17,11 +16,7 @@
             --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-color);
@@ -31,14 +26,8 @@
             padding-bottom: 60px;
         }
 
-        /* Container alignment */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
 
-        /* Header & Navigation */
         header {
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -48,254 +37,121 @@
             z-index: 100;
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text-color); text-decoration: none; font-family: monospace; }
+        .logo span { color: var(--accent-color); }
+        .nav-links { display: flex; list-style: none; gap: 24px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--text-color); }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-color);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
+        .hero { padding: 90px 0 60px 0; text-align: left; max-width: 800px; }
+        .hero h1 { font-size: 2.75rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; line-height: 1.2; }
+        .hero h1 span { color: var(--accent-color); }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 24px; }
 
-        .logo span {
-            color: var(--accent-color);
-        }
+        .badge-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .badge { background-color: #1e293b; border: 1px solid var(--border-color); color: var(--text-color); font-size: 0.85rem; padding: 6px 14px; border-radius: 6px; font-weight: 500; }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-        }
+        .projects-section { padding: 30px 0; }
+        .section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; color: var(--text-color); }
 
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0 60px 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 32px auto;
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 40px 0;
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 32px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -6px;
-            width: 40px;
-            height: 3px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        /* Project Grid & Cards */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
 
         .project-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .project-card:hover {
-            transform: translateY(-4px);
-            border-color: #475569;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-        }
+        .project-card:hover { transform: translateY(-2px); border-color: var(--accent-color); }
+        .project-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        .tag { background-color: rgba(59, 130, 246, 0.08); color: var(--accent-color); font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .project-content {
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+        .project-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text-color); }
+        .project-description { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
+        .project-link { display: inline-flex; align-items: center; color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.9rem; gap: 6px; }
+        .project-link:hover { color: var(--accent-color); }
 
-        .tag {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-color);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 100px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .project-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .project-description {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-            flex-grow: 1;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            gap: 8px;
-            transition: color 0.2s ease;
-        }
-
-        .project-link:hover {
-            color: var(--accent-color);
-        }
-
-        .project-link svg {
-            transition: transform 0.2s ease;
-        }
-
-        .project-link:hover svg {
-            transform: translateX(4px);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 100px;
-            border-top: 1px solid var(--border-color);
-            padding: 40px 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.25rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="container nav-container">
-            <a href="#" class="logo">Portfolio<span>.</span></a>
+            <a href="#" class="logo">FQ<span>//</span>Systems</a>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#portfolio">Technical Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
     <main class="container">
+        <!-- Bio focused on Independent Global Specialist role -->
         <section class="hero">
-            <h1>Securing Data, Building Solutions</h1>
-            <p>Welcome to my personal portfolio. Below you'll find featured production-ready applications focusing on security, compliance, and clean software architecture.</p>
+            <div class="badge-container">
+                <span class="badge">Available for Tech Ecosystem Collaboration</span>
+                <span class="badge">US Technical Background</span>
+            </div>
+            <h1>Independent Solutions Architect specializing in <span>Cloud Infrastructure & Compliance Automation</span></h1>
+            <p>Providing independent systems architecture, enterprise database migrations, and localized regulatory compliance frameworks for global-facing operations.</p>
         </section>
 
-        <section id="projects" class="projects-section">
-            <h2 class="section-title">Featured Projects</h2>
+        <section id="portfolio" class="projects-section">
+            <h2 class="section-title">Technical Case Studies</h2>
             
             <div class="projects-grid">
                 
+                <!-- Core Link: KVKK-Shield Project Card -->
                 <div class="project-card">
                     <div class="project-content">
                         <div class="project-tags">
+                            <span class="tag">Compliance Automation</span>
                             <span class="tag">Security</span>
-                            <span class="tag">Compliance</span>
-                            <span class="tag">Privacy</span>
                         </div>
-                        <h3 class="project-title">KVKK-Shield</h3>
+                        <h3 class="project-title">KVKK-Shield Architecture</h3>
                         <p class="project-description">
-                            An automated data protection and compliance architecture framework mapped specifically to Turkish Personal Data Protection Law (KVKK) protocols. Minimizes enterprise leak vectors and standardizes data tracking workflows.
+                            A personal technical framework mapping corporate cloud storage environments to Turkish Personal Data Protection Law (KVKK) technical security requirements. Automates risk point identification and logs compliance pipelines.
                         </p>
-                        <a href="portfolio/KVKK-Shield.html" class="project-link">
-                            View Case Study 
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3.33334 8H12.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8 3.33334L12.6667 8L8 12.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
+                        <!-- Relative link targeting your portfolio structure -->
+                        <a href="portfolio/KVKK-Shield.html" class="project-link">Analyze System Framework →</a>
                     </div>
                 </div>
 
+                <!-- US Experience Card 1: Odoo Middleware -->
                 <div class="project-card">
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="tag">Development</span>
-                            <span class="tag">API</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">ERP Database</span>
+                            <span class="tag">Data Integrity</span>
                         </div>
-                        <h3 class="project-title">Project Two Placeholder</h3>
+                        <h3 class="project-title">Enterprise ERP Migration Engine</h3>
                         <p class="project-description">
-                            A high-performance system architecture built to show scalability metrics. Easily replaceable with your secondary core project specifications.
+                            Architected custom Python middleware scripts to execute high-stakes data migration from legacy accounting systems to Odoo ERP. Engineered custom ledger mapping logic and automated multi-currency alignment rules.
                         </p>
-                        <a href="#" class="project-link">
-                            View Project
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3.33334 8H12.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8 3.33334L12.6667 8L8 12.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
+                        <span class="project-link" style="color: var(--text-muted);">Independent Consultation Project</span>
+                    </div>
+                </div>
+
+                <!-- US Experience Card 2: Public Sector Architecture -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Azure</span>
+                            <span class="tag">M365 Cloud Architecture</span>
+                        </div>
+                        <h3 class="project-title">Public Sector Grant Management System</h3>
+                        <p class="project-description">
+                            Designed the cloud infrastructure blueprint for a US-based public transportation authority's Federal Grant Tracking solution, ensuring strict government data isolation and high-availability access control matrices.
+                        </p>
+                        <span class="project-link" style="color: var(--text-muted);">Architecture Blueprint Project</span>
                     </div>
                 </div>
 
@@ -305,7 +161,7 @@
 
     <footer>
         <div class="container" id="contact">
-            <p>&copy; 2026 Portfolio. All rights reserved.</p>
+            <p>&copy; 2026 Favad Qaisar. Formulated with precise focus on system efficiency and compliance engineering.</p>
         </div>
     </footer>
 
