@@ -1,209 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favad | Senior Software Architect & B2B SaaS Founder</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0f172a',
-                            card: '#1e293b',
-                            accent: '#10b981',
-                            accentHover: '#059669',
-                            textMuted: '#94a3b8'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KVKK Shield — AI Privacy Guard | Favad Qaisar</title>
+  <meta name="description" content="KVKK Shield is a browser tool that hides Turkish personal data (ID number, phone, e-mail, IBAN) on the user's own computer before it can be sent to AI apps like ChatGPT. It helps companies follow KVKK without banning AI tools." />
+  <meta name="author" content="Favad Qaisar" />
+  <link rel="canonical" href="https://favad.me/KVKK-Shield.html" />
+
+  <style>
+    :root {
+      --bg: #0f172a; --bg-elevated: #0b1222; --card-bg: #1e293b; --card-bg-hover: #233045;
+      --accent: #3b82f6; --accent-soft: #60a5fa; --accent-glow: rgba(59,130,246,0.18);
+      --text: #f8fafc; --text-muted: #94a3b8; --text-dim: #64748b;
+      --border: #334155; --border-strong: #475569; --success: #34d399; --warn: #fbbf24; --danger: #f87171;
+      --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+      --radius: 14px; --radius-sm: 8px; --maxw: 980px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: radial-gradient(900px 500px at 85% -5%, rgba(59,130,246,0.10), transparent 60%), var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-soft); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
+
+    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(160%) blur(10px); background: rgba(15,23,42,0.72); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-family: var(--font-mono); font-weight: 600; color: var(--text); }
+    .brand span { color: var(--accent); }
+    .back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.92rem; color: var(--text-muted); font-weight: 500; }
+    .back:hover { color: var(--text); text-decoration: none; }
+
+    .hero { padding: var(--space-8) 0 var(--space-6); border-bottom: 1px solid var(--border); }
+    .kicker { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: var(--space-4); }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; max-width: 20ch; }
+    .hero .sub { margin-top: var(--space-4); font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 62ch; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+    .pill { font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-soft); background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.28); padding: 0.32rem 0.6rem; border-radius: 6px; }
+
+    .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: var(--space-7) 0; }
+    .meta-cell { background: var(--card-bg); padding: var(--space-4) var(--space-5); }
+    .meta-cell .l { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .meta-cell .d { font-weight: 600; margin-top: 0.3rem; font-size: 0.98rem; }
+
+    section.block { padding: var(--space-7) 0; border-bottom: 1px solid var(--border); }
+    section.block:last-of-type { border-bottom: none; }
+    .h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); letter-spacing: -0.01em; font-weight: 700; margin-bottom: var(--space-4); display: flex; align-items: baseline; gap: 0.7rem; }
+    .h2 .n { font-family: var(--font-mono); color: var(--accent); font-size: 0.95rem; }
+    p.body { color: var(--text-muted); margin-bottom: var(--space-4); font-size: 1.04rem; }
+    p.body strong { color: var(--text); font-weight: 600; }
+    .lead { font-size: 1.12rem; color: #cbd5e1; }
+
+    .callout { border-left: 3px solid var(--accent); background: rgba(59,130,246,0.07); padding: var(--space-4) var(--space-5); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: var(--space-5) 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(251,191,36,0.07); }
+    .callout .t { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 0.4rem; }
+    .callout.warn .t { color: var(--warn); }
+    .callout p { color: #cbd5e1; margin: 0; font-size: 0.98rem; }
+
+    ul.feat { list-style: none; margin: var(--space-4) 0; }
+    ul.feat li { position: relative; padding-left: 1.6rem; margin-bottom: var(--space-3); color: var(--text-muted); }
+    ul.feat li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+    ul.feat li strong { color: var(--text); font-weight: 600; }
+
+    .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); margin: var(--space-5) 0; }
+    .flow .step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-4); }
+    .flow .step .s { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); }
+    .flow .step h4 { font-size: 0.98rem; margin: 0.35rem 0 0.3rem; }
+    .flow .step p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+    .code { background: #0b1120; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: var(--space-5) 0; }
+    .code .bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); background: #0e1628; }
+    .code .bar .dot { width: 11px; height: 11px; border-radius: 50%; background: #334155; }
+    .code .bar .fname { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); margin-left: 0.4rem; }
+    .code pre { margin: 0; padding: var(--space-5); overflow-x: auto; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.7; color: #cbd5e1; }
+    .code .cm { color: var(--text-dim); }
+    .code .kw { color: #c084fc; }
+    .code .fn { color: var(--accent-soft); }
+    .code .st { color: #34d399; }
+    .code .nu { color: #fbbf24; }
+    .code .rx { color: #f0abfc; }
+
+    .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+    .panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); }
+    .panel h4 { font-size: 1rem; margin-bottom: var(--space-3); display: flex; align-items: center; gap: 0.5rem; }
+    .panel.before h4 { color: var(--danger); }
+    .panel.after h4 { color: var(--success); }
+    .panel code { display: block; font-family: var(--font-mono); font-size: 0.82rem; background: #0b1120; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-4); color: #cbd5e1; white-space: pre-wrap; word-break: break-word; }
+    .panel .red { color: var(--danger); }
+    .panel .grn { color: var(--success); }
+
+    table.tbl { width: 100%; border-collapse: collapse; margin: var(--space-5) 0; font-size: 0.92rem; }
+    table.tbl th, table.tbl td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--border); }
+    table.tbl th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    table.tbl td { color: var(--text-muted); }
+    table.tbl td code { font-family: var(--font-mono); color: var(--accent-soft); font-size: 0.85rem; }
+
+    .cta { background: linear-gradient(135deg, var(--card-bg), var(--bg-elevated)); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-7); text-align: center; margin: var(--space-7) 0; }
+    .cta h2 { font-size: 1.6rem; margin-bottom: var(--space-3); }
+    .cta p { color: var(--text-muted); max-width: 56ch; margin: 0 auto var(--space-5); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; padding: 0.7rem 1.3rem; border-radius: var(--radius-sm); transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease; }
+    .btn-primary { background: var(--accent); color: #fff; } .btn-primary:hover { transform: translateY(-2px); background: var(--accent-soft); text-decoration: none; }
+    .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); } .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+    .pager { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+
+    footer.site { border-top: 1px solid var(--border); padding: var(--space-6) 0; margin-top: var(--space-6); color: var(--text-dim); font-size: 0.88rem; }
+
+    @media (max-width: 720px) { .twocol { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<body class="bg-[#0f172a] text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-slate-900">
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">FQ<span>//</span>Systems</a>
+      <a class="back" href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to home
+      </a>
+    </div>
+  </header>
 
-    <header class="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                <span class="text-emerald-500">&lt;</span>favad.me<span class="text-emerald-500">/&gt;</span>
-            </a>
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-                <a href="#about" class="hover:text-emerald-400 transition">About</a>
-                <a href="#track-record" class="hover:text-emerald-400 transition">Track Record</a>
-                <a href="#kvkk-shield" class="hover:text-emerald-400 transition">Active R&D</a>
-                <a href="#contact" class="px-4 py-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition">Get in Touch</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="max-w-5xl mx-auto px-6 py-20 md:py-32 flex flex-col justify-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold mb-6 w-fit">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Open for R&D Collaboration
-        </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-            Designing secure architectures for <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">global scale.</span>
-        </h1>
-        <p class="text-lg md:text-xl text-slate-400 max-w-3xl mb-10 leading-relaxed">
-            I am a senior software architect and B2B SaaS founder with over a decade of technical leadership. I specialize in cloud-agnostic microservices, high-throughput distributed systems, and local-first browser architectures. I have successfully scaled digital assets in the US market to over $1M USD in annual revenue, and am currently building client-side AI compliance systems at Terminal Istanbul.
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Project 01 &middot; Built for Türkiye &middot; In progress</p>
+        <h1>KVKK Shield: An AI Privacy Guard for Turkish Companies</h1>
+        <p class="sub">
+          KVKK Shield is a small browser tool. It hides Turkish personal data — like ID numbers, phone
+          numbers, and e-mails — right on the user's own computer, before that data can be sent to AI
+          apps such as ChatGPT or Claude. It lets staff keep using AI tools while still following the
+          KVKK data-protection law.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#kvkk-shield" class="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold transition text-center shadow-lg shadow-emerald-500/20">
-                View Active R&D Project
-            </a>
-            <a href="#track-record" class="px-6 py-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-300 font-semibold transition text-center bg-slate-800/20">
-                Explore Portfolio
-            </a>
+        <div class="pill-row">
+          <span class="pill">Browser Extension</span>
+          <span class="pill">Runs On Your Computer</span>
+          <span class="pill">No Servers</span>
+          <span class="pill">KVKK (Law No. 6698)</span>
+          <span class="pill">JavaScript</span>
         </div>
+      </div>
     </section>
 
-    <section id="about" class="border-t border-slate-800 bg-[#0d1321] py-20">
-        <div class="max-w-5xl mx-auto px-6">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-12">Core Technical Expertise</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-6 rounded-xl bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition">
-                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">
-                        01
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2">High-Availability Backend</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Architecting decoupled, highly concurrent microservices using Python, Go, and NodeJS. Expert in designing distributed event-driven systems with RabbitMQ and Kafka.
-                    </p>
-                </div>
-                <div class="p-6 rounded-xl bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition">
-                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">
-                        02
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Local-First Privacy Tech</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Pioneering client-side parsing and obfuscation utilities. Utilizing advanced DOM scraping, regular expressions, and client-side web models to process datasets locally before cloud sync.
-                    </p>
-                </div>
-                <div class="p-6 rounded-xl bg-slate-800/40 border border-slate-800 hover:border-slate-700 transition">
-                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold mb-4">
-                        03
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-2">B2B SaaS Scaling</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Full-stack systems development from initial concept to commercial deployment. Experienced in global billing (Stripe), OAuth flows, and multi-tenant database isolation models.
-                    </p>
-                </div>
-            </div>
+    <div class="wrap">
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="l">My role</div><div class="d">Designer &amp; Developer</div></div>
+        <div class="meta-cell"><div class="l">Field</div><div class="d">Privacy &amp; AI Safety</div></div>
+        <div class="meta-cell"><div class="l">Country</div><div class="d">Türkiye (KVKK)</div></div>
+        <div class="meta-cell"><div class="l">Where it runs</div><div class="d">In the browser only</div></div>
+        <div class="meta-cell"><div class="l">Stage</div><div class="d">Prototype → Pilot</div></div>
+        <div class="meta-cell"><div class="l">Goal</div><div class="d">Terminal İstanbul</div></div>
+      </div>
+
+      <!-- 1. PROBLEM -->
+      <section class="block">
+        <h2 class="h2"><span class="n">01</span> The problem</h2>
+        <p class="body lead">
+          AI apps have become a normal part of everyday work. A staff member pastes a customer list to
+          write an e-mail. A support agent pastes a complaint to get a quick summary. An analyst pastes a
+          report to "clean it up." This saves time. But in Türkiye, it is often against the law.
+        </p>
+        <p class="body">
+          The Turkish data-protection law, <strong>KVKK (Law No. 6698)</strong>, has strict rules about
+          sending personal data outside the country. Popular AI apps — ChatGPT, Claude, Gemini, Copilot —
+          run on servers abroad. So the moment someone pastes a Turkish ID number
+          (<strong>T.C. Kimlik No</strong>), a local phone number, a customer e-mail, or an IBAN into one
+          of these apps, personal data has just left the country. Usually there is no consent and no
+          record. That is a real KVKK risk.
+        </p>
+        <div class="callout warn">
+          <div class="t">Why a simple ban does not work</div>
+          <p>
+            Many companies react by banning AI tools at work. In practice this fails. People just use the
+            tools on their phones or personal accounts instead — which is worse, because the data still
+            leaves, and now the company cannot see any of it. KVKK Shield takes the opposite approach:
+            <strong>let people keep their tools, and make the data safe before it is ever sent.</strong>
+          </p>
         </div>
-    </section>
+        <p class="body">
+          There is one key idea here. The only safe place to clean the data is the
+          <strong>user's own computer, after they finish typing and before the message is sent</strong>.
+          A company firewall cannot help, because the message is already encrypted and on its way. So the
+          guard has to live in the browser itself.
+        </p>
+      </section>
 
-    <section id="track-record" class="py-20 border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-12">
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Proven Track Record</h2>
-                    <p class="text-slate-400 text-sm">International B2B software assets commercialized in competitive global markets.</p>
-                </div>
-                <div class="mt-4 md:mt-0 text-3xl font-black text-emerald-500 tracking-tight">
-                    $1M+ ARR
-                </div>
-            </div>
-
-            <div class="p-8 rounded-2xl bg-slate-800/20 border border-slate-800/60 flex flex-col md:flex-row gap-8 items-center">
-                <div class="flex-1">
-                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">Active US Enterprise Venture</div>
-                    <h3 class="text-xl font-extrabold text-white mb-3">Enterprise Workflow Automation Suite</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        Designed, coded, and deployed a cloud-native B2B workflow automation platform targeting mid-market enterprises in the United States. Utilizing advanced queue management and headless browser clustering, the system processes millions of automated operations monthly with 99.99% uptime. 100% of the intellectual property is owned privately and runs autonomously on zero-maintenance, serverless architecture.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">AWS</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">Python</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">PostgreSQL</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">React</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">Docker</span>
-                    </div>
-                </div>
-            </div>
+      <!-- 2. SOLUTION -->
+      <section class="block">
+        <h2 class="h2"><span class="n">02</span> The solution: clean the text in the browser</h2>
+        <p class="body">
+          KVKK Shield is a <strong>browser extension</strong>. It has <strong>no server, no login, and
+          no tracking</strong>. All the work happens inside the user's own browser. When it finds personal
+          data in a message, it replaces that data with a safe label (for example, a real ID number
+          becomes <code>[ID_1]</code>) <em>before</em> the message is sent. So the message that actually
+          leaves the computer has no real personal data in it.
+        </p>
+        <div class="flow">
+          <div class="step"><div class="s">01</div><h4>Watch</h4><p>It watches the AI chat box on a short list of approved AI websites.</p></div>
+          <div class="step"><div class="s">02</div><h4>Find</h4><p>It checks the text for ID numbers, phones, e-mails, IBANs, and card numbers.</p></div>
+          <div class="step"><div class="s">03</div><h4>Hide</h4><p>It swaps each one for a safe label and remembers the pairing in memory only.</p></div>
+          <div class="step"><div class="s">04</div><h4>Send</h4><p>Only the cleaned text is sent. If something looks unclear, it pauses and asks.</p></div>
+          <div class="step"><div class="s">05</div><h4>Restore</h4><p>In the reply on screen, it can put the real words back, just for the user.</p></div>
         </div>
-    </section>
+        <p class="body">
+          For the user, it feels normal. They type as usual, and the AI answers as usual. But the private
+          data never leaves their computer. If the tool is not sure whether something is private, it
+          <strong>stops and asks</strong> instead of guessing. Safe is the default.
+        </p>
+      </section>
 
-    <section id="kvkk-shield" class="py-20 border-t border-slate-800 bg-[#0d1321]">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="mb-12">
-                <span class="text-emerald-500 text-xs font-bold uppercase tracking-widest">Active R&D Project</span>
-                <h2 class="text-3xl font-extrabold text-white mt-1">KVKK Shield: Client-Side Data Guardrail</h2>
-                <p class="text-slate-400 mt-2">Solving the absolute biggest compliance friction point for Turkish enterprises using public Generative AI.</p>
-            </div>
+      <!-- 3. DETECTION -->
+      <section class="block">
+        <h2 class="h2"><span class="n">03</span> How it finds personal data accurately</h2>
+        <p class="body">
+          Finding data correctly is the hard part. A simple rule like "hide any 11 digits" would also hide
+          order numbers and product codes. Too many false alarms, and people switch the tool off. So KVKK
+          Shield does not just check the shape of a number — it <strong>checks if the number is really
+          valid</strong>. For a Turkish ID number, it runs the official math test that real ID numbers
+          must pass.
+        </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-4">The Context & Workplace Pain</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                        Under the Turkish Personal Data Protection Law (KVKK), copying and pasting customer data or personal identifiers (T.C. IDs, local phone numbers, emails) into public AI models (like ChatGPT or Claude) is classified as an illegal cross-border data transfer. 
-                        Following the **March 12, 2026 KVKK directives**, companies face severe audit liabilities and fines for "BYOAgentic" workflows used by employees without technical safeguards. Total bans are impractical and hurt workplace productivity.
-                    </p>
-                    <h3 class="text-lg font-bold text-white mb-4">The Innovation</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        **KVKK Shield** is a browser extension running 100% client-side. It intercepts chat penders instantly via DOM Event Listeners. Before any text payload is compiled and sent to US-based servers, our local regex algorithms sanitize Turkish PII patterns (TCKN, local phone numbers, emails) and replace them with secure, generalized placeholders. Real data never leaves the local machine.
-                    </p>
-                </div>
+        <div class="code">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="fname">detect-id.js</span></div>
+<pre><span class="cm">// Check if a Turkish ID number (TCKN) is really valid,</span>
+<span class="cm">// not just "11 digits". This removes almost all false alarms.</span>
+<span class="kw">function</span> <span class="fn">isValidTurkishID</span>(value) {
+  <span class="kw">if</span> (!<span class="rx">/^[1-9]\d{10}$/</span>.<span class="fn">test</span>(value)) <span class="kw">return</span> <span class="kw">false</span>;
+  <span class="kw">const</span> d = [...value].<span class="fn">map</span>(Number);
 
-                <div class="p-6 rounded-2xl bg-[#1e293b] border border-slate-700 shadow-xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl"></div>
-                    <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Active Extension Prototype (content.js)
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">
-                        This is the actual, lightweight content script running client-side inside ChatGPT/Claude to sanitize Turkish personal data in real-time.
-                    </p>
-                    <div class="bg-[#0f172a] p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 overflow-x-auto max-h-[300px]">
-<pre>
-<span class="text-slate-500">// Turkish T.C. ID Number RegEx Pattern</span>
-<span class="text-emerald-400">const</span> tcknRegex = <span class="text-teal-400">/\b[1-9]\d{10}\b/g</span>;
+  <span class="kw">const</span> oddSum  = d[<span class="nu">0</span>] + d[<span class="nu">2</span>] + d[<span class="nu">4</span>] + d[<span class="nu">6</span>] + d[<span class="nu">8</span>];
+  <span class="kw">const</span> evenSum = d[<span class="nu">1</span>] + d[<span class="nu">3</span>] + d[<span class="nu">5</span>] + d[<span class="nu">7</span>];
 
-<span class="text-slate-500">// Real-time sanitization function</span>
-<span class="text-emerald-400">function</span> <span class="text-blue-400">maskSensitiveData</span>(text) {
-  <span class="text-emerald-400">return</span> text.replace(tcknRegex, <span class="text-teal-400">"&lt;REDACTED_TCKN&gt;"</span>);
+  <span class="kw">const</span> check10 = ((oddSum * <span class="nu">7</span>) - evenSum) % <span class="nu">10</span>;
+  <span class="kw">const</span> check11 = (oddSum + evenSum + d[<span class="nu">9</span>]) % <span class="nu">10</span>;
+
+  <span class="kw">return</span> d[<span class="nu">9</span>] === check10 &amp;&amp; d[<span class="nu">10</span>] === check11;
+}</pre>
+        </div>
+
+        <p class="body">
+          It checks the most common types of personal data, and gives each one a clear label so the
+          message still makes sense:
+        </p>
+
+        <table class="tbl">
+          <thead><tr><th>Type of data</th><th>How it is found</th><th>Safe label</th></tr></thead>
+          <tbody>
+            <tr><td>Turkish ID number (TCKN)</td><td>Right shape + official math check</td><td><code>[ID_1]</code></td></tr>
+            <tr><td>Turkish phone number</td><td><code>+90</code> / <code>05xx</code> patterns</td><td><code>[PHONE_1]</code></td></tr>
+            <tr><td>E-mail address</td><td>Standard e-mail pattern</td><td><code>[EMAIL_1]</code></td></tr>
+            <tr><td>Bank account (IBAN)</td><td><code>TR</code> + valid checksum</td><td><code>[IBAN_1]</code></td></tr>
+            <tr><td>Card number</td><td>13–19 digits + Luhn check</td><td><code>[CARD_1]</code></td></tr>
+            <tr><td>Names of people / places</td><td>Simple on-device name list</td><td><code>[NAME_1]</code></td></tr>
+          </tbody>
+        </table>
+
+        <p class="body">
+          The labels are numbered on purpose. If a message has two people and two phone numbers, the
+          numbers keep them apart — "call <code>[NAME_2]</code> on <code>[PHONE_2]</code>" — so the AI's
+          answer still makes sense and the real words can be put back correctly.
+        </p>
+      </section>
+
+      <!-- 4. INTERCEPTION -->
+      <section class="block">
+        <h2 class="h2"><span class="n">04</span> How it catches the message in time</h2>
+        <p class="body">
+          KVKK Shield checks the message in <strong>two places</strong>, for safety. First, it cleans the
+          text in the chat box the moment the user presses Enter or clicks Send. Second, it checks the
+          message again at the last step, just before it goes out over the network. If the first check is
+          ever missed, the second one still catches it.
+        </p>
+
+        <div class="code">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="fname">check-on-send.js</span></div>
+<pre><span class="cm">// Step 1: clean the text when the user tries to send it.</span>
+<span class="kw">function</span> <span class="fn">onSend</span>(event) {
+  <span class="kw">const</span> box = <span class="fn">getChatBox</span>(event.target);
+  <span class="kw">if</span> (!box) <span class="kw">return</span>;
+
+  <span class="kw">const</span> original = <span class="fn">getText</span>(box);
+  <span class="kw">const</span> result   = <span class="fn">cleanText</span>(original);   <span class="cm">// finds and labels private data</span>
+
+  <span class="kw">if</span> (result.unsure) {
+    event.<span class="fn">preventDefault</span>();             <span class="cm">// not sure? stop and ask the user</span>
+    <span class="fn">showQuickReview</span>(box, result);
+    <span class="kw">return</span>;
+  }
+  <span class="fn">setText</span>(box, result.cleaned);         <span class="cm">// real data never reaches the network</span>
 }
 
-<span class="text-slate-500">// Intercept Prompt DOM submission</span>
-document.addEventListener(<span class="text-teal-400">'keydown'</span>, (event) => {
-  <span class="text-emerald-400">const</span> target = event.target;
-  <span class="text-emerald-400">if</span> (target && target.tagName === <span class="text-teal-400">'TEXTAREA'</span>) {
-    <span class="text-emerald-400">if</span> (event.key === <span class="text-teal-400">'Enter'</span>) {
-      target.value = <span class="text-blue-400">maskSensitiveData</span>(target.value);
-    }
-  }
-}, <span class="text-emerald-400">true</span>);
-</pre>
-                    </div>
-                    <div class="mt-4 flex justify-between items-center text-xs text-slate-400">
-                        <span>Infinite margins ($0 server/API costs)</span>
-                        <span class="text-emerald-400 font-semibold">100% Client-Side</span>
-                    </div>
-                </div>
-            </div>
+document.<span class="fn">addEventListener</span>(<span class="st">"keydown"</span>, e =&gt; {
+  <span class="kw">if</span> (e.key === <span class="st">"Enter"</span> &amp;&amp; !e.shiftKey) <span class="fn">onSend</span>(e);
+}, <span class="kw">true</span>);</pre>
         </div>
-    </section>
 
-    <section id="contact" class="py-20 border-t border-slate-800">
-        <div class="max-w-3xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-extrabold text-white mb-4">Let's Build the Future of AI Privacy</h2>
-            <p class="text-slate-400 mb-8 leading-relaxed">
-                I am actively applying for the **Bilişim Vadisi / Terminal İstanbul GO Path Pre-Incubation Program** to build, test, and scale the **KVKK Shield** browser extension inside the Atatürk Airport technology zone. I look forward to contributing my 10+ years of software architecture experience back to the local ecosystem.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="mailto:info@favad.me" class="px-8 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold transition">
-                    info@favad.me
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="px-8 py-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-300 font-semibold transition bg-slate-800/20">
-                    LinkedIn Profile
-                </a>
-            </div>
+        <ul class="feat">
+          <li><strong>It runs first.</strong> The check happens before the AI website's own code, so it cannot be skipped.</li>
+          <li><strong>It has a backup.</strong> A second check at the network step catches anything the first one misses.</li>
+          <li><strong>It only runs where needed.</strong> The tool is active only on a short list of approved AI sites, so every other website is untouched.</li>
+          <li><strong>It keeps working.</strong> If the page reloads parts of itself, the tool re-attaches to the new chat box automatically.</li>
+        </ul>
+      </section>
+
+      <!-- 5. BEFORE/AFTER -->
+      <section class="block">
+        <h2 class="h2"><span class="n">05</span> Before and after</h2>
+        <p class="body">
+          Here is what changes. The user writes the same message either way. But the message that leaves
+          the computer is very different.
+        </p>
+        <div class="twocol">
+          <div class="panel before">
+            <h4>✕ What the user types</h4>
+            <code>Write a reminder for <span class="red">Ayşe Yılmaz</span> (ID <span class="red">10000000146</span>), phone <span class="red">+90 532 000 11 22</span>, e-mail <span class="red">ayse@firma.com.tr</span>, IBAN <span class="red">TR12 0006 ...</span></code>
+          </div>
+          <div class="panel after">
+            <h4>✓ What is actually sent</h4>
+            <code>Write a reminder for <span class="grn">[NAME_1]</span> (ID <span class="grn">[ID_1]</span>), phone <span class="grn">[PHONE_1]</span>, e-mail <span class="grn">[EMAIL_1]</span>, IBAN <span class="grn">[IBAN_1]</span></code>
+          </div>
         </div>
-    </section>
+        <p class="body">
+          The AI writes a perfect reminder for <code>[NAME_1]</code>. On the user's screen, KVKK Shield can
+          quietly put the real name and details back into the reply. So the user gets a finished message,
+          and the private data never went anywhere.
+        </p>
+      </section>
 
-    <footer class="border-t border-slate-800 py-8 bg-[#0a0f1d] text-center text-xs text-slate-500">
-        <p>&copy; 2026 favad.me. All rights reserved. Built with 100% data privacy in mind.</p>
-    </footer>
+      <!-- 6. PRIVACY -->
+      <section class="block">
+        <h2 class="h2"><span class="n">06</span> Why you can trust it</h2>
+        <p class="body">
+          A privacy tool should not collect data itself. KVKK Shield is built so this is easy to prove:
+        </p>
+        <ul class="feat">
+          <li><strong>No server and no account.</strong> The tool has nowhere to send data, and makes no calls of its own. Anyone can check this in the browser.</li>
+          <li><strong>Nothing is saved.</strong> The list that links labels to real values lives in memory only, during the chat, and is then thrown away. It is never written to disk.</li>
+          <li><strong>A simple local log.</strong> The company can keep a record that says a piece of data was hidden (its type, time, and site) — but never the data itself. This gives proof that the tool is working.</li>
+          <li><strong>Company settings.</strong> A company can decide which data types are required and which AI sites are allowed, and roll the tool out to all staff.</li>
+          <li><strong>Safe by default.</strong> When in doubt, it stops and asks instead of sending.</li>
+        </ul>
+        <div class="callout">
+          <div class="t">How this fits KVKK</div>
+          <p>
+            KVKK is about keeping personal data to a minimum and only using it with a proper reason. KVKK
+            Shield does exactly that at the riskiest moment: it makes sure the private data simply is not
+            in the message that leaves the country — and it keeps a record to show the rule is being
+            followed.
+          </p>
+        </div>
+      </section>
 
+      <!-- 7. WHY TERMINAL ISTANBUL -->
+      <section class="block">
+        <h2 class="h2"><span class="n">07</span> Why this fits Terminal İstanbul</h2>
+        <p class="body">
+          KVKK Shield is <strong>made for Türkiye</strong>. It solves a problem that Turkish companies face
+          every single day. It is built for local needs from the start — it knows Turkish ID numbers,
+          Turkish phone formats, and Turkish bank accounts. And it answers a hard legal question with a
+          practical tool instead of a ban.
+        </p>
+        <p class="body">
+          A six-month desk at <strong>Terminal İstanbul</strong> would put this project next to the
+          founders, lawyers, and companies who are its first users. I bring the full skill set to build it
+          — the design, the code, and more than ten years of cloud and data-protection work from US
+          government and company projects. I also want to give back: to mentor others and help the local
+          tech community while I take KVKK Shield from a prototype to a real, working product.
+        </p>
+      </section>
+
+      <div class="cta">
+        <h2>Want to talk about KVKK Shield?</h2>
+        <p>I am happy to show how it works or set up a small test for your team.</p>
+        <a class="btn btn-primary" href="mailto:info@favad.me">info@favad.me</a>
+      </div>
+
+      <div class="pager">
+        <a class="btn btn-ghost" href="index.html">← All projects</a>
+        <a class="btn btn-ghost" href="odoo-migration.html">Next: Wave → Odoo Migration →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">&copy; 2026 Favad Qaisar — Founder &amp; CEO, Communication Square (Microsoft Gold Partner). KVKK Shield is a personal project for the Turkish market.</div>
+  </footer>
 </body>
 </html>

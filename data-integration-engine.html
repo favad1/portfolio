@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Source of Truth Across Clouds | Favad Qaisar</title>
+  <meta name="description" content="A Python tool that keeps Microsoft 365, Google Workspace, and Notion in sync as one trusted source of truth — deciding who can see what, keeping each file in its proper place, and recording every change." />
+  <meta name="author" content="Favad Qaisar" />
+  <link rel="canonical" href="https://favad.me/data-integration-engine.html" />
+  <style>
+    :root {
+      --bg: #0f172a; --bg-elevated: #0b1222; --card-bg: #1e293b; --card-bg-hover: #233045;
+      --accent: #3b82f6; --accent-soft: #60a5fa; --accent-glow: rgba(59,130,246,0.18);
+      --text: #f8fafc; --text-muted: #94a3b8; --text-dim: #64748b;
+      --border: #334155; --border-strong: #475569; --success: #34d399; --warn: #fbbf24; --danger: #f87171;
+      --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+      --radius: 14px; --radius-sm: 8px; --maxw: 980px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: radial-gradient(900px 500px at 85% -5%, rgba(59,130,246,0.10), transparent 60%), var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-soft); text-decoration: none; } a:hover { text-decoration: underline; }
+    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
+    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(160%) blur(10px); background: rgba(15,23,42,0.72); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-family: var(--font-mono); font-weight: 600; color: var(--text); } .brand span { color: var(--accent); }
+    .back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.92rem; color: var(--text-muted); font-weight: 500; } .back:hover { color: var(--text); text-decoration: none; }
+    .hero { padding: var(--space-8) 0 var(--space-6); border-bottom: 1px solid var(--border); }
+    .kicker { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: var(--space-4); }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; max-width: 20ch; }
+    .hero .sub { margin-top: var(--space-4); font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 62ch; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+    .pill { font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-soft); background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.28); padding: 0.32rem 0.6rem; border-radius: 6px; }
+    .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: var(--space-7) 0; }
+    .meta-cell { background: var(--card-bg); padding: var(--space-4) var(--space-5); }
+    .meta-cell .l { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .meta-cell .d { font-weight: 600; margin-top: 0.3rem; font-size: 0.98rem; }
+    section.block { padding: var(--space-7) 0; border-bottom: 1px solid var(--border); } section.block:last-of-type { border-bottom: none; }
+    .h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); letter-spacing: -0.01em; font-weight: 700; margin-bottom: var(--space-4); display: flex; align-items: baseline; gap: 0.7rem; }
+    .h2 .n { font-family: var(--font-mono); color: var(--accent); font-size: 0.95rem; }
+    p.body { color: var(--text-muted); margin-bottom: var(--space-4); font-size: 1.04rem; } p.body strong { color: var(--text); font-weight: 600; }
+    .lead { font-size: 1.12rem; color: #cbd5e1; }
+    .callout { border-left: 3px solid var(--accent); background: rgba(59,130,246,0.07); padding: var(--space-4) var(--space-5); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: var(--space-5) 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(251,191,36,0.07); }
+    .callout .t { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 0.4rem; } .callout.warn .t { color: var(--warn); }
+    .callout p { color: #cbd5e1; margin: 0; font-size: 0.98rem; }
+    ul.feat { list-style: none; margin: var(--space-4) 0; }
+    ul.feat li { position: relative; padding-left: 1.6rem; margin-bottom: var(--space-3); color: var(--text-muted); }
+    ul.feat li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+    ul.feat li strong { color: var(--text); font-weight: 600; }
+    .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); margin: var(--space-5) 0; }
+    .flow .step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-4); }
+    .flow .step .s { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); }
+    .flow .step h4 { font-size: 0.98rem; margin: 0.35rem 0 0.3rem; }
+    .flow .step p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+    .code { background: #0b1120; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: var(--space-5) 0; }
+    .code .bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); background: #0e1628; }
+    .code .bar .dot { width: 11px; height: 11px; border-radius: 50%; background: #334155; }
+    .code .bar .fname { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); margin-left: 0.4rem; }
+    .code pre { margin: 0; padding: var(--space-5); overflow-x: auto; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.7; color: #cbd5e1; }
+    .code .cm { color: var(--text-dim); } .code .kw { color: #c084fc; } .code .fn { color: var(--accent-soft); } .code .st { color: #34d399; } .code .nu { color: #fbbf24; }
+    table.tbl { width: 100%; border-collapse: collapse; margin: var(--space-5) 0; font-size: 0.92rem; }
+    table.tbl th, table.tbl td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    table.tbl th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    table.tbl td { color: var(--text-muted); } table.tbl td code { font-family: var(--font-mono); color: var(--accent-soft); font-size: 0.85rem; }
+    .cta { background: linear-gradient(135deg, var(--card-bg), var(--bg-elevated)); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-7); text-align: center; margin: var(--space-7) 0; }
+    .cta h2 { font-size: 1.6rem; margin-bottom: var(--space-3); } .cta p { color: var(--text-muted); max-width: 56ch; margin: 0 auto var(--space-5); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; padding: 0.7rem 1.3rem; border-radius: var(--radius-sm); transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease; }
+    .btn-primary { background: var(--accent); color: #fff; } .btn-primary:hover { transform: translateY(-2px); background: var(--accent-soft); text-decoration: none; }
+    .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); } .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+    .pager { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+    footer.site { border-top: 1px solid var(--border); padding: var(--space-6) 0; margin-top: var(--space-6); color: var(--text-dim); font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">FQ<span>//</span>Systems</a>
+      <a class="back" href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to home
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Project 03 &middot; Integration &middot; Data Control</p>
+        <h1>One Source of Truth Across Three Clouds</h1>
+        <p class="sub">
+          Many teams keep the same information in three places — Microsoft 365, Google Workspace, and
+          Notion — and the three never quite match. I built a Python tool that keeps them in sync as
+          <strong>one trusted source of truth</strong>: it decides who can see what, keeps each file in
+          its proper place, and records every change so it can be checked later.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Python</span>
+          <span class="pill">Microsoft 365</span>
+          <span class="pill">Google Workspace</span>
+          <span class="pill">Notion</span>
+          <span class="pill">Access Control</span>
+          <span class="pill">Audit Log</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="l">My role</div><div class="d">Designed &amp; built the tool</div></div>
+        <div class="meta-cell"><div class="l">Main record</div><div class="d">Notion</div></div>
+        <div class="meta-cell"><div class="l">Connected</div><div class="d">M365 &middot; Google &middot; Notion</div></div>
+        <div class="meta-cell"><div class="l">Sync</div><div class="d">No duplicates, ever</div></div>
+        <div class="meta-cell"><div class="l">Control</div><div class="d">Who sees what + where data lives</div></div>
+        <div class="meta-cell"><div class="l">Record</div><div class="d">Every change is logged</div></div>
+      </div>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">01</span> The problem: the truth is in three places</h2>
+        <p class="body lead">
+          Most teams do not have too little information. They have the same information spread across too
+          many apps. The real version of a record is in one place, its files are in another, and the work
+          around it happens in a third. Nobody can answer one simple question: "Where is the correct
+          version, and who is allowed to see it?"
+        </p>
+        <p class="body">
+          The obvious fix — copy everything into one app — is the wrong move when the data is private or
+          sensitive. Every copy is one more place that can leak. And some files are not allowed to move:
+          rules may say they must stay in a certain account, region, or service. So the challenge was to
+          give people the <em>feeling</em> of one single source of truth, while letting each piece of data
+          stay exactly where the rules say it must.
+        </p>
+        <div class="callout warn">
+          <div class="t">The key rule</div>
+          <p>
+            <strong>Files are linked, never copied or moved.</strong> The main record keeps a tidy row of
+            information plus a link to the real file in its home app. So there is only one copy of any
+            sensitive file, in its proper place, and the tool only adds links and notes — it never makes
+            extra copies.
+          </p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">02</span> How it is built: one hub, many connectors</h2>
+        <p class="body">
+          The design is simple. <strong>Notion is the hub</strong> — the main, easy-to-read record that
+          people look at. Each other app (Microsoft 365, Google Workspace) has its own small
+          <strong>connector</strong>. A connector does four things: log in, get what changed, put it into
+          one shared format, and note where the data is allowed to live. A central part then keeps every
+          app in step with the hub on a schedule, and a control layer wraps the whole thing.
+        </p>
+        <div class="flow">
+          <div class="step"><div class="s">1</div><h4>Log in</h4><p>Each app connects with its own secure login and the smallest access it needs.</p></div>
+          <div class="step"><div class="s">2</div><h4>Get changes</h4><p>It pulls only what changed since last time, so it stays fast.</p></div>
+          <div class="step"><div class="s">3</div><h4>Tidy up</h4><p>It puts every app's data into one shared format and tags where it must live.</p></div>
+          <div class="step"><div class="s">4</div><h4>Match</h4><p>It updates the hub by a fixed ID, and links files instead of copying them.</p></div>
+          <div class="step"><div class="s">5</div><h4>Log</h4><p>It writes down every change so it can be checked later.</p></div>
+        </div>
+        <div class="code">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="fname">connector.py</span></div>
+<pre><span class="cm"># Every app follows the same simple shape. Adding a new app</span>
+<span class="cm"># means writing one small class — nothing else has to change.</span>
+<span class="kw">class</span> <span class="fn">Connector</span>:
+    name      = <span class="st">""</span>
+    lives_in  = <span class="st">""</span>                          <span class="cm"># where this data is allowed to live</span>
+
+    <span class="kw">def</span> <span class="fn">log_in</span>(self): ...
+    <span class="kw">def</span> <span class="fn">get_changes</span>(self, since): ...        <span class="cm"># only what changed</span>
+    <span class="kw">def</span> <span class="fn">to_common_format</span>(self, item): ...
+    <span class="kw">def</span> <span class="fn">link_for</span>(self, item): ...           <span class="cm"># a link — we never copy the file</span></pre>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">03</span> One record, never a duplicate</h2>
+        <p class="body">
+          The biggest risk in a sync tool is the duplicate. Run it twice and you get two of everything. I
+          stop this by giving every record a <strong>fixed ID</strong> built from its own details. Then
+          syncing is simple: if that ID is already in the hub, update it; if not, add it. Running the whole
+          tool again always ends in one correct result — no copies.
+        </p>
+        <div class="code">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="fname">identity.py</span></div>
+<pre><span class="kw">import</span> hashlib
+
+<span class="kw">def</span> <span class="fn">fixed_id</span>(app, kind, original_id):
+    <span class="cm"># Same details always give the same ID. So records never duplicate.</span>
+    text = <span class="st">f"{app}|{kind}|{original_id}"</span>.<span class="fn">lower</span>().<span class="fn">strip</span>()
+    <span class="kw">return</span> <span class="st">"FQ-"</span> + hashlib.<span class="fn">sha1</span>(text.<span class="fn">encode</span>()).<span class="fn">hexdigest</span>()[:<span class="nu">16</span>]
+
+<span class="kw">def</span> <span class="fn">sync_one</span>(record, hub):
+    key = <span class="fn">fixed_id</span>(record.app, record.kind, record.original_id)
+    <span class="kw">if</span> hub.<span class="fn">has</span>(key):
+        hub.<span class="fn">update</span>(key, record.changed_fields())   <span class="cm"># keep human notes safe</span>
+    <span class="kw">else</span>:
+        hub.<span class="fn">add</span>(key, record.fields())</pre>
+        </div>
+        <div class="callout">
+          <div class="t">It respects people's own work</div>
+          <p>
+            The tool only updates the fields it owns — values, sync dates, and links. It
+            <strong>never overwrites notes that a person wrote</strong> by hand. So the automatic updates
+            and the human notes live side by side without fighting.
+          </p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">04</span> Control: who can see it, and where it lives</h2>
+        <p class="body">
+          Bringing data together is only safe if you also bring the rules together. The control layer adds
+          two checks to every record:
+        </p>
+        <table class="tbl">
+          <thead><tr><th>Control</th><th>What it does</th><th>How</th></tr></thead>
+          <tbody>
+            <tr><td>Who can see what</td><td>Sets read/write rights per type of record</td><td>A role-to-permission list is checked before any read or write</td></tr>
+            <tr><td>Where data lives</td><td>Keeps each record and file in its allowed place</td><td>Each record carries a fixed "lives in" tag; moves out of bounds are refused</td></tr>
+            <tr><td>Which app wins</td><td>Decides the main app when two disagree</td><td>A main/backup order, so a backup can add to but not replace the main</td></tr>
+            <tr><td>Least access</td><td>Limits what each connector can touch</td><td>Each connector only gets access to the exact data it needs</td></tr>
+          </tbody>
+        </table>
+        <p class="body">
+          Because files are linked and not copied, a file that must stay in one place
+          <strong>physically never leaves it</strong>. The hub just holds a link, and the rules decide who
+          may open it. This is the same careful, "keep data where it belongs" approach that strict
+          environments need — and it is exactly what data-protection laws like GDPR and KVKK are asking
+          for.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">05</span> Checking the work and keeping a safe record</h2>
+        <p class="body">
+          A tool that controls data must be able to show what it did. After each sync, it counts the
+          records and checks the totals before calling the run a success. And it writes every action to a
+          <strong>safe, add-only log</strong> where each entry includes a code from the entry before it.
+          If anyone tries to change the history later, the codes stop matching and the change is easy to
+          spot.
+        </p>
+        <div class="code">
+          <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="fname">log.py</span></div>
+<pre><span class="kw">import</span> hashlib, json
+
+<span class="kw">def</span> <span class="fn">add_to_log</span>(log, action):
+    last = log[-<span class="nu">1</span>][<span class="st">"code"</span>] <span class="kw">if</span> log <span class="kw">else</span> <span class="st">"START"</span>
+    text = json.<span class="fn">dumps</span>(action, sort_keys=<span class="kw">True</span>)
+    code = hashlib.<span class="fn">sha256</span>(<span class="st">f"{last}{text}"</span>.<span class="fn">encode</span>()).<span class="fn">hexdigest</span>()
+    log.<span class="fn">append</span>({<span class="st">"action"</span>: action, <span class="st">"after"</span>: last, <span class="st">"code"</span>: code})
+    <span class="kw">return</span> log   <span class="cm"># change any old entry and every later code breaks</span></pre>
+        </div>
+        <ul class="feat">
+          <li><strong>Count and total checks</strong> after each run — the run only passes if the numbers add up.</li>
+          <li><strong>A safe history</strong> that proves the record of changes has not been edited later.</li>
+          <li><strong>A preview mode</strong> that shows every add, update, and link before anything touches a live system — easy to review and safe to demo.</li>
+        </ul>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">06</span> Why this matters</h2>
+        <p class="body">
+          The same design that brings a company's apps together is also the design that careful, regulated
+          work needs: one clear main record, connectors that respect each app's limits, fixed IDs so
+          nothing leaks or duplicates, and a record you can check. It is the everyday-business version of
+          the strict separation work I did for US government projects — and it shows, in real Python code,
+          the "keep data where it belongs and control who sees it" approach that GDPR and KVKK are built
+          around.
+        </p>
+      </section>
+
+      <div class="cta">
+        <h2>Want your apps to agree on one truth?</h2>
+        <p>I build sync tools that feel like one system without breaking the rules.</p>
+        <a class="btn btn-primary" href="mailto:info@favad.me">info@favad.me</a>
+      </div>
+
+      <div class="pager">
+        <a class="btn btn-ghost" href="odoo-migration.html">← Wave → Odoo Migration</a>
+        <a class="btn btn-ghost" href="grant-management-system.html">Next: US Grant Tracking →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">&copy; 2026 Favad Qaisar — Founder &amp; CEO, Communication Square (Microsoft Gold Partner).</div>
+  </footer>
+</body>
+</html>

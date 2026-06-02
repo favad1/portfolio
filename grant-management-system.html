@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Federal Grant Tracking System | Favad Qaisar</title>
+  <meta name="description" content="Cloud design for a federal grant-tracking app for a large US public transport agency — built on Microsoft 365 and Azure, with each department's data kept separate and safe, strict control over who can open what, and a full record for government audits." />
+  <meta name="author" content="Favad Qaisar" />
+  <link rel="canonical" href="https://favad.me/grant-management-system.html" />
+  <style>
+    :root {
+      --bg: #0f172a; --bg-elevated: #0b1222; --card-bg: #1e293b; --card-bg-hover: #233045;
+      --accent: #3b82f6; --accent-soft: #60a5fa; --accent-glow: rgba(59,130,246,0.18);
+      --text: #f8fafc; --text-muted: #94a3b8; --text-dim: #64748b;
+      --border: #334155; --border-strong: #475569; --success: #34d399; --warn: #fbbf24; --danger: #f87171;
+      --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+      --radius: 14px; --radius-sm: 8px; --maxw: 980px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: radial-gradient(900px 500px at 85% -5%, rgba(59,130,246,0.10), transparent 60%), var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent-soft); text-decoration: none; } a:hover { text-decoration: underline; }
+    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
+    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(160%) blur(10px); background: rgba(15,23,42,0.72); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-family: var(--font-mono); font-weight: 600; color: var(--text); } .brand span { color: var(--accent); }
+    .back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.92rem; color: var(--text-muted); font-weight: 500; } .back:hover { color: var(--text); text-decoration: none; }
+    .hero { padding: var(--space-8) 0 var(--space-6); border-bottom: 1px solid var(--border); }
+    .kicker { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: var(--space-4); }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; max-width: 20ch; }
+    .hero .sub { margin-top: var(--space-4); font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 62ch; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+    .pill { font-family: var(--font-mono); font-size: 0.74rem; color: var(--accent-soft); background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.28); padding: 0.32rem 0.6rem; border-radius: 6px; }
+    .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: var(--space-7) 0; }
+    .meta-cell { background: var(--card-bg); padding: var(--space-4) var(--space-5); }
+    .meta-cell .l { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .meta-cell .d { font-weight: 600; margin-top: 0.3rem; font-size: 0.98rem; }
+    section.block { padding: var(--space-7) 0; border-bottom: 1px solid var(--border); } section.block:last-of-type { border-bottom: none; }
+    .h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); letter-spacing: -0.01em; font-weight: 700; margin-bottom: var(--space-4); display: flex; align-items: baseline; gap: 0.7rem; }
+    .h2 .n { font-family: var(--font-mono); color: var(--accent); font-size: 0.95rem; }
+    p.body { color: var(--text-muted); margin-bottom: var(--space-4); font-size: 1.04rem; } p.body strong { color: var(--text); font-weight: 600; }
+    .lead { font-size: 1.12rem; color: #cbd5e1; }
+    .callout { border-left: 3px solid var(--accent); background: rgba(59,130,246,0.07); padding: var(--space-4) var(--space-5); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: var(--space-5) 0; }
+    .callout.warn { border-left-color: var(--warn); background: rgba(251,191,36,0.07); }
+    .callout .t { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 0.4rem; } .callout.warn .t { color: var(--warn); }
+    .callout p { color: #cbd5e1; margin: 0; font-size: 0.98rem; }
+    ul.feat { list-style: none; margin: var(--space-4) 0; }
+    ul.feat li { position: relative; padding-left: 1.6rem; margin-bottom: var(--space-3); color: var(--text-muted); }
+    ul.feat li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+    ul.feat li strong { color: var(--text); font-weight: 600; }
+    .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-3); margin: var(--space-5) 0; }
+    .flow .step { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-4); }
+    .flow .step .s { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); }
+    .flow .step h4 { font-size: 0.98rem; margin: 0.35rem 0 0.3rem; }
+    .flow .step p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+    table.tbl { width: 100%; border-collapse: collapse; margin: var(--space-5) 0; font-size: 0.92rem; }
+    table.tbl th, table.tbl td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    table.tbl th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+    table.tbl td { color: var(--text-muted); } table.tbl td code { font-family: var(--font-mono); color: var(--accent-soft); font-size: 0.85rem; }
+    .cta { background: linear-gradient(135deg, var(--card-bg), var(--bg-elevated)); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-7); text-align: center; margin: var(--space-7) 0; }
+    .cta h2 { font-size: 1.6rem; margin-bottom: var(--space-3); } .cta p { color: var(--text-muted); max-width: 56ch; margin: 0 auto var(--space-5); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; padding: 0.7rem 1.3rem; border-radius: var(--radius-sm); transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease; }
+    .btn-primary { background: var(--accent); color: #fff; } .btn-primary:hover { transform: translateY(-2px); background: var(--accent-soft); text-decoration: none; }
+    .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); } .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+    .pager { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+    footer.site { border-top: 1px solid var(--border); padding: var(--space-6) 0; margin-top: var(--space-6); color: var(--text-dim); font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">FQ<span>//</span>Systems</a>
+      <a class="back" href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to home
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Project 04 &middot; US Public Sector &middot; Cloud Design</p>
+        <h1>A Grant-Tracking System for a US Public Transport Agency</h1>
+        <p class="sub">
+          A large US public transport agency needed to track the federal grant money it receives and
+          spends. I designed the cloud setup for the app on <strong>Microsoft 365 and Azure</strong>. The
+          main challenges were keeping each department's data separate and safe, controlling exactly who
+          could open what, and meeting strict government rules for tracking public money.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Azure</span>
+          <span class="pill">Microsoft 365</span>
+          <span class="pill">Government</span>
+          <span class="pill">Access Control</span>
+          <span class="pill">Always Available</span>
+          <span class="pill">Full Audit Trail</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="l">My role</div><div class="d">Cloud architect</div></div>
+        <div class="meta-cell"><div class="l">Client type</div><div class="d">US public transport agency</div></div>
+        <div class="meta-cell"><div class="l">Purpose</div><div class="d">Track federal grants</div></div>
+        <div class="meta-cell"><div class="l">Built on</div><div class="d">Microsoft 365 &amp; Azure</div></div>
+        <div class="meta-cell"><div class="l">Key need</div><div class="d">Keep data separate &amp; safe</div></div>
+        <div class="meta-cell"><div class="l">Must pass</div><div class="d">Government audits</div></div>
+      </div>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">01</span> The task</h2>
+        <p class="body lead">
+          When a public agency receives money from the federal government, it has to show exactly where
+          every dollar goes. Different grants have different rules. Different teams handle different grants.
+          And auditors can ask, at any time, for a full and honest record of who did what and when.
+        </p>
+        <p class="body">
+          The agency needed one app to track all of this — but with a hard requirement: each grant's data
+          and each department's data had to be <strong>kept apart and protected</strong>. A user from one
+          program should never be able to see another program's records. At the same time, the system had
+          to be <strong>always available</strong>, because the work does not stop. My job was to design the
+          cloud setup that makes all of this true and provable.
+        </p>
+        <div class="callout warn">
+          <div class="t">The hard part</div>
+          <p>
+            In government work, "trust me, it's fine" is not enough. The system has to be built so that
+            keeping data separate, limiting access, and recording every action are <strong>built into the
+            design</strong> — not added later and not optional. That is what an auditor checks.
+          </p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">02</span> Keeping each program's data separate</h2>
+        <p class="body">
+          The core of the design is a clear <strong>separation map</strong>. Each grant program gets its
+          own protected space in Microsoft 365 and Azure, with its own data store and its own access
+          rules. Data from one program cannot cross into another. Think of it as separate locked rooms in
+          one building, instead of one big open room.
+        </p>
+        <div class="flow">
+          <div class="step"><div class="s">1</div><h4>Separate spaces</h4><p>Each program gets its own protected area, so data never mixes.</p></div>
+          <div class="step"><div class="s">2</div><h4>Clear borders</h4><p>Strong borders between areas stop data from crossing over.</p></div>
+          <div class="step"><div class="s">3</div><h4>Right access</h4><p>People only get into the areas their role allows.</p></div>
+          <div class="step"><div class="s">4</div><h4>Safe links</h4><p>When areas must share, they do so only through checked, secure links.</p></div>
+        </div>
+        <p class="body">
+          This "separate rooms" design is the same idea behind strict US public-sector and
+          high-security cloud setups. It limits the damage if anything ever goes wrong: a problem in one
+          program's area stays in that area and cannot spread to the others.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">03</span> Deciding who can open what</h2>
+        <p class="body">
+          On top of the separate spaces sits a clear <strong>access map</strong>: a simple table of "this
+          role can do these things to this data." Access is given by job role, not to people one by one,
+          so it is easy to manage and easy to review. Everyone gets the least access they need to do their
+          job — and no more.
+        </p>
+        <table class="tbl">
+          <thead><tr><th>Role</th><th>Can see</th><th>Can do</th></tr></thead>
+          <tbody>
+            <tr><td>Program manager</td><td>Only their own program</td><td>View and edit their program's records</td></tr>
+            <tr><td>Finance reviewer</td><td>Spending across programs</td><td>View totals and approve, but not edit source records</td></tr>
+            <tr><td>Auditor</td><td>The full record and history</td><td>View only — cannot change anything</td></tr>
+            <tr><td>System admin</td><td>Settings, not grant content</td><td>Manage accounts and access, with every action logged</td></tr>
+          </tbody>
+        </table>
+        <p class="body">
+          Splitting roles this way means no single person can both spend money and approve their own
+          spending. That separation is a basic rule for handling public funds, and here it is built right
+          into the system.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">04</span> Safe connections and staying online</h2>
+        <p class="body">
+          The app also needs to talk to other systems — for example, to pull in spending data or send
+          reports. Those connections are made through <strong>secure, checked links</strong> (APIs), where
+          each side proves who it is and only the allowed data passes through. Nothing connects directly to
+          the sensitive data store without going through these checks.
+        </p>
+        <ul class="feat">
+          <li><strong>Always available.</strong> The design uses backups across more than one location, so if one part fails, the system keeps running.</li>
+          <li><strong>Checked connections.</strong> Every link between systems proves its identity first and is limited to the exact data it needs.</li>
+          <li><strong>Data stays in bounds.</strong> The setup keeps data in the regions and accounts that government rules require, and does not let it drift elsewhere.</li>
+          <li><strong>Encrypted everywhere.</strong> Data is protected both while stored and while moving between systems.</li>
+        </ul>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">05</span> A full record for audits</h2>
+        <p class="body">
+          Because this is public money, the system keeps a <strong>full, honest record</strong> of every
+          important action: who opened a record, who changed it, who approved spending, and when. This
+          record is kept safe so it cannot be quietly edited later. When an auditor asks "show me what
+          happened," the answer is ready and complete.
+        </p>
+        <div class="callout">
+          <div class="t">Why this builds trust</div>
+          <p>
+            Separate spaces, role-based access, secure links, and a full record are exactly what a
+            government auditor looks for. Designing them in from the start means the agency can prove it is
+            handling federal money correctly — not just say so.
+          </p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h2"><span class="n">06</span> Why this experience matters</h2>
+        <p class="body">
+          This project shows the level of trust and care US public agencies require. The same skills —
+          keeping data separate, controlling access by role, connecting systems safely, and keeping a full
+          record — are exactly what data-protection laws like GDPR and KVKK ask for too. It is the
+          background I bring to my newer work, including <a href="KVKK-Shield.html">KVKK Shield</a> for the
+          Turkish market.
+        </p>
+      </section>
+
+      <div class="cta">
+        <h2>Need a system auditors can trust?</h2>
+        <p>I design cloud setups where strong security and clear records are built in from day one.</p>
+        <a class="btn btn-primary" href="mailto:info@favad.me">info@favad.me</a>
+      </div>
+
+      <div class="pager">
+        <a class="btn btn-ghost" href="data-integration-engine.html">← One Source of Truth</a>
+        <a class="btn btn-ghost" href="index.html">Back to home →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">&copy; 2026 Favad Qaisar — Founder &amp; CEO, Communication Square (Microsoft Gold Partner).</div>
+  </footer>
+</body>
+</html>

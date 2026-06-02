@@ -1,169 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favad Qaisar | Enterprise Solutions Architect & Consultant</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favad Qaisar — Microsoft Cloud &amp; Data Protection Consultant</title>
+  <meta name="description" content="Favad Qaisar — Founder &amp; CEO of Communication Square, a US-based Microsoft Gold Partner. I help governments and growing companies move safely to the Microsoft Cloud (Microsoft 365 and Azure) and follow data-protection rules like GDPR and KVKK." />
+  <meta name="author" content="Favad Qaisar" />
+  <link rel="canonical" href="https://favad.me/" />
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Favad Qaisar — Microsoft Cloud &amp; Data Protection Consultant" />
+  <meta property="og:description" content="Founder &amp; CEO of Communication Square (Microsoft Gold Partner). Cloud migrations, data protection, and the KVKK Shield project for the Turkish market." />
+  <meta property="og:url" content="https://favad.me/" />
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-stack);
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
+  <style>
+    :root {
+      --bg: #0f172a; --bg-elevated: #0b1222; --card-bg: #1e293b; --card-bg-hover: #233045;
+      --accent: #3b82f6; --accent-soft: #60a5fa; --accent-glow: rgba(59,130,246,0.18);
+      --text: #f8fafc; --text-muted: #94a3b8; --text-dim: #64748b;
+      --border: #334155; --border-strong: #475569; --success: #34d399;
 
-        .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
 
-        header {
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            background-color: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-        }
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", Menlo, Consolas, monospace;
+      --radius: 14px; --radius-sm: 8px; --maxw: 1120px;
+      --shadow-lift: 0 18px 40px -16px rgba(0, 0, 0, 0.75);
+    }
 
-        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text-color); text-decoration: none; font-family: monospace; }
-        .logo span { color: var(--accent-color); }
-        .nav-links { display: flex; list-style: none; gap: 24px; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
-        .nav-links a:hover { color: var(--text-color); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(900px 500px at 85% -5%, rgba(59,130,246,0.10), transparent 60%),
+        radial-gradient(700px 500px at 0% 10%, rgba(59,130,246,0.06), transparent 55%),
+        var(--bg);
+      color: var(--text); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
 
-        .hero { padding: 90px 0 60px 0; text-align: left; max-width: 800px; }
-        .hero h1 { font-size: 2.75rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; line-height: 1.2; }
-        .hero h1 span { color: var(--accent-color); }
-        .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 24px; }
+    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(160%) blur(10px); background: rgba(15,23,42,0.72); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { font-family: var(--font-mono); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: var(--text); }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: var(--space-6); align-items: center; }
+    .nav-links a { font-size: 0.95rem; color: var(--text-muted); transition: color 0.2s ease; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { border: 1px solid var(--border-strong); padding: 0.5rem 0.95rem; border-radius: var(--radius-sm); color: var(--text) !important; transition: border-color 0.2s ease, background 0.2s ease; }
+    .nav-cta:hover { border-color: var(--accent); background: var(--accent-glow); }
 
-        .badge-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .badge { background-color: #1e293b; border: 1px solid var(--border-color); color: var(--text-color); font-size: 0.85rem; padding: 6px 14px; border-radius: 6px; font-weight: 500; }
+    .hero { padding: var(--space-9) 0 var(--space-8); }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: var(--space-4); }
+    .hero h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; max-width: 20ch; }
+    .hero h1 .grad { background: linear-gradient(120deg, var(--accent-soft), #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero .lede { margin-top: var(--space-5); font-size: clamp(1.05rem, 2vw, 1.22rem); color: var(--text-muted); max-width: 60ch; }
+    .badges { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.86rem; font-weight: 500; color: var(--text); background: var(--card-bg); border: 1px solid var(--border); padding: 0.55rem 0.9rem; border-radius: 999px; }
+    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px rgba(52,211,153,0.15); }
+    .badge .dot.blue { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
 
-        .projects-section { padding: 30px 0; }
-        .section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; color: var(--text-color); }
+    .section { padding: var(--space-8) 0; }
+    .section-head { display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-6); }
+    .section-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.01em; font-weight: 700; }
+    .section-head .num { font-family: var(--font-mono); color: var(--accent); font-size: 0.95rem; }
 
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .bio-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--space-7); align-items: start; }
+    .bio-grid p { color: var(--text-muted); margin-bottom: var(--space-4); font-size: 1.05rem; }
+    .bio-grid p strong { color: var(--text); font-weight: 600; }
+    .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); }
+    .stat-card h3 { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: var(--space-4); }
+    .stat-row { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row .k { color: var(--text-muted); }
+    .stat-row .v { color: var(--text); font-weight: 600; text-align: right; }
 
-        .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-5); }
+    .card { position: relative; display: flex; flex-direction: column; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-6); transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease; overflow: hidden; }
+    .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0; transition: opacity 0.22s ease; }
+    .card:hover { transform: translateY(-6px); border-color: var(--accent); background: var(--card-bg-hover); box-shadow: var(--shadow-lift); }
+    .card:hover::before { opacity: 1; }
+    .card-index { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: var(--space-3); }
+    .card-index .flag { color: var(--accent-soft); }
+    .card h3 { font-size: 1.3rem; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+    .tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .tag { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--accent-soft); background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.28); padding: 0.28rem 0.55rem; border-radius: 6px; }
+    .card p { color: var(--text-muted); font-size: 0.97rem; margin-bottom: var(--space-5); flex: 1; }
+    .card-link { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--accent-soft); font-size: 0.95rem; }
+    .card-link svg { transition: transform 0.22s ease; }
+    .card:hover .card-link svg { transform: translateX(5px); }
+    .card.feature { border-color: rgba(59,130,246,0.4); }
+    .card.feature::after { content: "TERMINAL İSTANBUL PROJECT"; position: absolute; top: var(--space-5); right: -38px; transform: rotate(45deg); background: var(--accent); color: #fff; font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.06em; padding: 0.25rem 3rem; }
 
-        .project-card:hover { transform: translateY(-2px); border-color: var(--accent-color); }
-        .project-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-        .tag { background-color: rgba(59, 130, 246, 0.08); color: var(--accent-color); font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .contact-card { background: linear-gradient(135deg, var(--card-bg), var(--bg-elevated)); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-8) var(--space-7); text-align: center; }
+    .contact-card h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: var(--space-3); letter-spacing: -0.01em; }
+    .contact-card p { color: var(--text-muted); max-width: 56ch; margin: 0 auto var(--space-6); font-size: 1.05rem; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; padding: 0.7rem 1.3rem; border-radius: var(--radius-sm); transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--accent-soft); }
+    .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-        .project-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; color: var(--text-color); }
-        .project-description { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
+    footer.site { border-top: 1px solid var(--border); padding: var(--space-6) 0; margin-top: var(--space-7); }
+    .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-4); color: var(--text-dim); font-size: 0.88rem; }
+    .foot .brand { font-size: 0.95rem; }
 
-        .project-link { display: inline-flex; align-items: center; color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.9rem; gap: 6px; }
-        .project-link:hover { color: var(--accent-color); }
-
-        footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
-    </style>
+    @media (max-width: 760px) {
+      .nav-links { gap: var(--space-4); }
+      .nav-links a.hide-sm { display: none; }
+      .bio-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+      .hero { padding: var(--space-8) 0 var(--space-7); }
+      .section { padding: var(--space-7) 0; }
+    }
+    @media (max-width: 480px) {
+      .badge { font-size: 0.8rem; }
+      .contact-card { padding: var(--space-6) var(--space-4); }
+      .card.feature::after { display: none; }
+    }
+  </style>
 </head>
 <body>
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">FQ<span>//</span>Systems</a>
+      <nav class="nav-links">
+        <a href="#portfolio">Work</a>
+        <a class="hide-sm" href="#about">About</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <header>
-        <div class="container nav-container">
-            <a href="#" class="logo">FQ<span>//</span>Systems</a>
-            <ul class="nav-links">
-                <li><a href="#portfolio">Technical Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Microsoft Cloud &middot; Data Protection &middot; Consulting</p>
+        <h1>I help organizations move to the <span class="grad">Microsoft Cloud</span> — safely and by the rules.</h1>
+        <p class="lede">
+          I'm Favad Qaisar, Founder and CEO of Communication Square, a US-based
+          <strong style="color:var(--text)">Microsoft Gold Partner</strong>. For more than ten years
+          I have helped governments and growing companies move to Microsoft 365 and Azure, keep their
+          data safe, and follow data-protection laws like GDPR in Europe, US public-sector rules, and
+          now KVKK in Türkiye.
+        </p>
+        <div class="badges">
+          <span class="badge"><span class="dot blue"></span> Microsoft Gold Partner &middot; 10+ years</span>
+          <span class="badge"><span class="dot"></span> US Government &amp; Enterprise Clients</span>
+          <span class="badge"><span class="dot blue"></span> Building KVKK Shield for Türkiye</span>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main class="container">
-        <!-- Bio focused on Independent Global Specialist role -->
-        <section class="hero">
-            <div class="badge-container">
-                <span class="badge">Available for Tech Ecosystem Collaboration</span>
-                <span class="badge">US Technical Background</span>
-            </div>
-            <h1>Independent Solutions Architect specializing in <span>Cloud Infrastructure & Compliance Automation</span></h1>
-            <p>Providing independent systems architecture, enterprise database migrations, and localized regulatory compliance frameworks for global-facing operations.</p>
-        </section>
-
-        <section id="portfolio" class="projects-section">
-            <h2 class="section-title">Technical Case Studies</h2>
-            
-            <div class="projects-grid">
-                
-                <!-- Core Link: KVKK-Shield Project Card -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">Compliance Automation</span>
-                            <span class="tag">Security</span>
-                        </div>
-                        <h3 class="project-title">KVKK-Shield Architecture</h3>
-                        <p class="project-description">
-                            A personal technical framework mapping corporate cloud storage environments to Turkish Personal Data Protection Law (KVKK) technical security requirements. Automates risk point identification and logs compliance pipelines.
-                        </p>
-                        <!-- Relative link targeting your portfolio structure -->
-                        <a href="portfolio/KVKK-Shield.html" class="project-link">Analyze System Framework →</a>
-                    </div>
-                </div>
-
-                <!-- US Experience Card 1: Odoo Middleware -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">ERP Database</span>
-                            <span class="tag">Data Integrity</span>
-                        </div>
-                        <h3 class="project-title">Enterprise ERP Migration Engine</h3>
-                        <p class="project-description">
-                            Architected custom Python middleware scripts to execute high-stakes data migration from legacy accounting systems to Odoo ERP. Engineered custom ledger mapping logic and automated multi-currency alignment rules.
-                        </p>
-                        <span class="project-link" style="color: var(--text-muted);">Independent Consultation Project</span>
-                    </div>
-                </div>
-
-                <!-- US Experience Card 2: Public Sector Architecture -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">Azure</span>
-                            <span class="tag">M365 Cloud Architecture</span>
-                        </div>
-                        <h3 class="project-title">Public Sector Grant Management System</h3>
-                        <p class="project-description">
-                            Designed the cloud infrastructure blueprint for a US-based public transportation authority's Federal Grant Tracking solution, ensuring strict government data isolation and high-availability access control matrices.
-                        </p>
-                        <span class="project-link" style="color: var(--text-muted);">Architecture Blueprint Project</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container" id="contact">
-            <p>&copy; 2026 Favad Qaisar. Formulated with precise focus on system efficiency and compliance engineering.</p>
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head"><span class="num">01</span><h2>About me</h2></div>
+        <div class="bio-grid">
+          <div>
+            <p>
+              I started <strong>Communication Square</strong> in 2015 and have led it ever since as CEO
+              and CTO. We are a <strong>Microsoft Gold Partner</strong> in the United States. Our job is
+              simple to say and hard to do well: help an organization move its email, files, and apps to
+              the Microsoft Cloud without losing data, breaking the budget, or breaking the law.
+            </p>
+            <p>
+              Over the years I have done this work for <strong>government agencies and mid-size
+              companies</strong>. That means I care about two things at once: the technology has to work,
+              and it has to follow the rules. I plan the move to <strong>Microsoft 365 and Azure</strong>,
+              I write the small programs (in Python) that move and check the data, and I set up the access
+              controls that decide who can see what. Microsoft has even featured one of my solutions for
+              front-line workers.
+            </p>
+            <p>
+              The part I enjoy most is making hard rules easy to follow. Whether it is GDPR in Europe, the
+              strict rules for US public agencies, or <strong>KVKK in Türkiye</strong>, the goal is the
+              same: build the system so that following the law is the default, not extra work. I am now
+              putting that experience into <strong>KVKK Shield</strong>, a project built for the Turkish
+              market — and I would love to grow it from inside the local tech community.
+            </p>
+          </div>
+          <aside class="stat-card" aria-label="Quick facts">
+            <h3>Quick facts</h3>
+            <div class="stat-row"><span class="k">Role</span><span class="v">Founder &amp; CEO / CTO</span></div>
+            <div class="stat-row"><span class="k">Company</span><span class="v">Communication Square</span></div>
+            <div class="stat-row"><span class="k">Partner status</span><span class="v">Microsoft Gold Partner</span></div>
+            <div class="stat-row"><span class="k">Experience</span><span class="v">10+ years</span></div>
+            <div class="stat-row"><span class="k">Main tools</span><span class="v">Microsoft 365 &middot; Azure</span></div>
+            <div class="stat-row"><span class="k">Clients</span><span class="v">US gov &amp; enterprise</span></div>
+            <div class="stat-row"><span class="k">Languages</span><span class="v">English &middot; Urdu &middot; some Turkish</span></div>
+          </aside>
         </div>
-    </footer>
+      </div>
+    </section>
 
+    <section class="section" id="portfolio">
+      <div class="wrap">
+        <div class="section-head"><span class="num">02</span><h2>My work</h2></div>
+        <div class="grid">
+
+          <article class="card feature">
+            <div class="card-index"><span class="flag">★</span>&nbsp;PROJECT 01 &middot; TÜRKİYE</div>
+            <h3>KVKK Shield — AI Privacy Guard</h3>
+            <div class="tags"><span class="tag">[KVKK]</span><span class="tag">[Privacy]</span><span class="tag">[Browser Tool]</span></div>
+            <p>
+              A small browser tool that stops staff from sending Turkish personal data (ID numbers,
+              phone numbers, e-mails) to AI apps like ChatGPT by accident. It hides that data right on
+              the user's computer, before anything is sent. Nothing is stored on any server. This is the
+              project I want to grow at Terminal İstanbul.
+            </p>
+            <a class="card-link" href="KVKK-Shield.html">
+              See the project
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card-index">PROJECT 02 &middot; FINANCE</div>
+            <h3>Wave → Odoo Accounts Migration</h3>
+            <div class="tags"><span class="tag">[Python]</span><span class="tag">[Accounting]</span><span class="tag">[Data]</span></div>
+            <p>
+              I moved a company's full accounting records from an old tool (Wave) into a new system
+              (Odoo) using my own Python scripts. The hard part was making sure every number matched to
+              the cent and nothing was lost or doubled. The scripts check the books automatically and
+              prove they balance.
+            </p>
+            <a class="card-link" href="odoo-migration.html">
+              See the project
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card-index">PROJECT 03 &middot; INTEGRATION</div>
+            <h3>One Source of Truth Across Clouds</h3>
+            <div class="tags"><span class="tag">[Microsoft 365]</span><span class="tag">[Google]</span><span class="tag">[Notion]</span></div>
+            <p>
+              Many teams keep the same information in three places — Microsoft 365, Google Workspace, and
+              Notion — and it never matches. I built a Python tool that keeps them in sync, decides who is
+              allowed to see what, keeps each file in its proper place, and records every change so it can
+              be checked later.
+            </p>
+            <a class="card-link" href="data-integration-engine.html">
+              See the project
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card-index">PROJECT 04 &middot; US PUBLIC SECTOR</div>
+            <h3>Federal Grant Tracking System</h3>
+            <div class="tags"><span class="tag">[Azure]</span><span class="tag">[Microsoft 365]</span><span class="tag">[Government]</span></div>
+            <p>
+              I designed the cloud setup for a grant-tracking app for a large US public transport agency.
+              The main challenge was keeping each department's data separate and safe, controlling who
+              could open what, and meeting strict government rules for tracking public money.
+            </p>
+            <a class="card-link" href="grant-management-system.html">
+              See the project
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-card">
+          <h2>Let's work together.</h2>
+          <p>
+            I am open to working with founders, agencies, and public teams — and I would like to give
+            back to a local tech community through mentoring and shared projects. If you are moving to the
+            cloud, moving important data, or trying to meet data-protection rules, let's talk.
+          </p>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:info@favad.me">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              info@favad.me
+            </a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/favadqaisar">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap foot">
+      <a class="brand" href="index.html">FQ<span>//</span>Systems</a>
+      <span>&copy; 2026 Favad Qaisar — Founder &amp; CEO, Communication Square (Microsoft Gold Partner).</span>
+    </div>
+  </footer>
 </body>
 </html>
